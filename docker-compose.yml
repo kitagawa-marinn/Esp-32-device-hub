@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+      - FRONTEND_URL=http://localhost:3000
+      - JWT_SECRET=your-secret-key-change-in-production
+      - MONGODB_URI=mongodb://mongo:27017/esp32-hub
+    depends_on:
+      - mongo
+    networks:
+      - esp32-network
+    volumes:
+      - ./backend/src:/app/src
+    command: npm run dev
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:5000
+    depends_on:
+      - backend
+    networks:
+      - esp32-network
+    volumes:
+      - ./frontend/src:/app/src
+    command: npm start
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=esp32-hub
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - esp32-network
+
+volumes:
+  mongo-data:
+
+networks:
+  esp32-network:
+    driver: bridge

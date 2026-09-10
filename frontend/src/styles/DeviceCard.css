@@ -1,0 +1,70 @@
+.device-card {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  border-left: 4px solid #ddd;
+}
+
+.device-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.device-card.status-green {
+  border-left-color: #22c55e;
+}
+
+.device-card.status-red {
+  border-left-color: #ef4444;
+}
+
+.device-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.device-header h3 {
+  font-size: 18px;
+  color: #333;
+  margin: 0;
+}
+
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.status-badge.online {
+  background: #dcfce7;
+  color: #22c55e;
+}
+
+.status-badge.offline {
+  background: #fee2e2;
+  color: #ef4444;
+}
+
+.device-info {
+  margin: 15px 0;
+  font-size: 14px;
+}
+
+.device-info p {
+  margin: 8px 0;
+  color: #666;
+}
+
+.device-footer {
+  border-top: 1px solid #eee;
+  padding-top: 10px;
+  font-size: 12px;
+  color: #999;
+}
